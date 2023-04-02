@@ -3,7 +3,7 @@ import './App.css';
 import InputData from "./components/inputData/InputData";
 import OutputData from "./components/outputData/OutputData";
 import {Grid} from "@mui/material";
-import {DataContext, DataProvider} from "./context/context";
+import {DataContext} from "./context/context";
 import Basket from "./components/Basket/Basket";
 import {DataContextType} from "./types/types";
 
