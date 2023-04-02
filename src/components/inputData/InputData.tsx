@@ -14,22 +14,22 @@ const schema = yup
     .object({
         list: yup.string().required('Пожалуйста, выберите материал'),
         pipe: yup.string().required('Пожалуйста, выберите трубу'),
-        width: yup.number().typeError('Значение должно быть числом').min(5,'Минимальная ширина 5 м').max(50,'Максимальная ширина 50 м').required('Пожалуйста, выберите ширину каркаса'),
-        length: yup.number().typeError('Значение должно быть числом').min(5,'Минимальная длина 5 м').max(50,'Максимальная длина 50 м').required('Пожалуйста, выберите длину каркаса'),
-        frame:yup.number().required(),
+        width: yup.number().typeError('Значение должно быть числом').min(5, 'Минимальная ширина 5 м').max(50, 'Максимальная ширина 50 м').required('Пожалуйста, выберите ширину каркаса'),
+        length: yup.number().typeError('Значение должно быть числом').min(5, 'Минимальная длина 5 м').max(50, 'Максимальная длина 50 м').required('Пожалуйста, выберите длину каркаса'),
+        frame: yup.number().required(),
     })
     .required();
 
 
 const InputData = () => {
-    const {setResultHandler}=useContext(DataContext) as DataContextType
-    const {control, handleSubmit,formState: {errors, isValid}, reset} = useForm<FormValues>({
+    const {setResultHandler} = useContext(DataContext) as DataContextType
+    const {control, handleSubmit, formState: {errors}, reset} = useForm<FormValues>({
         resolver: yupResolver(schema),
-        mode:"onBlur",
+        mode: "onBlur",
         defaultValues: {
             list: '',
             pipe: '',
-            frame:1
+            frame: 1
         },
     });
 
@@ -41,7 +41,7 @@ const InputData = () => {
 
     const filtredList = data.filter(d => d.type === 'list')
     const filtredPipe = data.filter(d => d.type === 'pipe')
-    const filtredFrame=config.filter(d=>d.type==='frame')
+    const filtredFrame = config.filter(d => d.type === 'frame')
 
     return (
         <Grid item xs={6} p={3} justifyContent="center">
@@ -67,7 +67,8 @@ const InputData = () => {
                             </Select>
                         </FormControl>}
                     />
-                    {errors.list&&<Typography variant={"body1"} sx={{color:'red'}}>{errors.list.message}</Typography>}
+                    {errors.list &&
+                        <Typography variant={"body1"} sx={{color: 'red'}}>{errors.list.message}</Typography>}
                 </Box>
                 <Box sx={{minWidth: 120, pb: 4}}>
                     <Controller
@@ -85,7 +86,8 @@ const InputData = () => {
                             </Select>
                         </FormControl>}
                     />
-                    {errors.pipe&&<Typography variant={"body1"} sx={{color:'red', mb:2}}>{errors.pipe.message}</Typography>}
+                    {errors.pipe &&
+                        <Typography variant={"body1"} sx={{color: 'red', mb: 2}}>{errors.pipe.message}</Typography>}
                 </Box>
                 <Box sx={{minWidth: 120, pb: 4}}>
                     <Controller
@@ -99,11 +101,12 @@ const InputData = () => {
                                 placeholder={'Прочность'}
                                 {...field}>
                                 {filtredFrame.map((d, index) => <MenuItem key={index}
-                                                                         value={d.step}>{d.name}</MenuItem>)}
+                                                                          value={d.step}>{d.name}</MenuItem>)}
                             </Select>
                         </FormControl>}
                     />
-                    {errors.frame&&<Typography variant={"body1"} sx={{color:'red', mb:2}}>{errors.frame.message}</Typography>}
+                    {errors.frame &&
+                        <Typography variant={"body1"} sx={{color: 'red', mb: 2}}>{errors.frame.message}</Typography>}
                 </Box>
                 <Box>
                     <Typography variant="h6"> Длина каркаса</Typography>
@@ -125,7 +128,8 @@ const InputData = () => {
                             />
                         )}
                     />
-                    {errors.length&&<Typography variant={"body1"} sx={{color:'red', mb:2}}>{errors.length.message}</Typography>}
+                    {errors.length &&
+                        <Typography variant={"body1"} sx={{color: 'red', mb: 2}}>{errors.length.message}</Typography>}
                     <Typography variant="h6"> Ширина каркаса</Typography>
                     <Controller
                         name="width"
@@ -145,10 +149,11 @@ const InputData = () => {
                             />
                         )}
                     />
-                    {errors.width&&<Typography variant={"body1"} sx={{color:'red', mb:2}}>{errors.width.message}</Typography>}
+                    {errors.width &&
+                        <Typography variant={"body1"} sx={{color: 'red', mb: 2}}>{errors.width.message}</Typography>}
                 </Box>
                 <Box>
-                    <Button variant={"contained"}  disabled={false} onClick={handleSubmit(onSubmit)} > Отправить </Button>
+                    <Button variant={"contained"} disabled={false} onClick={handleSubmit(onSubmit)}> Отправить </Button>
                 </Box>
             </form>
         </Grid>

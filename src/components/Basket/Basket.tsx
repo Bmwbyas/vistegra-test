@@ -11,17 +11,18 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import {createData} from "../outputData/OutputData";
 import {DataContext} from "../../context/context";
 import {DataContextType} from "../../types/types";
+import RowBasket from "./rowBasket/RowBasket";
 
 const Basket = () => {
-    const {basket, toggleViewBasket} = useContext(DataContext) as DataContextType
+    const {baskets, toggleViewBasket} = useContext(DataContext) as DataContextType
 
 
     return (
         <Box p={4}>
-            <Button sx={{position:'fixed', top:32, left:30}} variant={"contained"} onClick={toggleViewBasket}>Назад</Button>
+            <Button sx={{position: 'fixed', top: 32, left: 30}} variant={"contained"}
+                    onClick={toggleViewBasket}>Назад</Button>
             <Typography variant="h4" textAlign="center">Корзина покупок</Typography>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
@@ -34,40 +35,14 @@ const Basket = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {basket.map((b, index) => {
-                            const rows = b.resultData.map((r) => createData(r.name, r.unit, r.count, r.totalPrice))
-                            return (
+                        {baskets.map((b, index) => {
 
-                                <>
-                                    {rows.map((row, index) => (
+                                return (
+                                    <RowBasket key={index} basket={b} />
 
-                                        <TableRow
-                                            key={index}
-                                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.unit}</TableCell>
-                                            <TableCell align="right">{row.amount}</TableCell>
-                                            <TableCell align="right">{row.price}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                    <TableRow sx={{'&:last-child td, &:last-child th': {border: 0},backgroundColor:'lavender'}}>
-                                        <TableCell component="th" scope="row">
-                                            <b>Итого</b>
-                                        </TableCell>
-                                        <TableCell align="right"></TableCell>
-                                        <TableCell align="right"></TableCell>
-                                        <TableCell align='right'>
-                                            {b.totalPrice}
-                                        </TableCell>
-                                    </TableRow>
-                                </>
-
-                            )
-                        }
-                    )}
+                                )
+                            }
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>

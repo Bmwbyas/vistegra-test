@@ -30,13 +30,13 @@ export type FormValues = {
 };
 
 export type DataContextType = {
-    basket: ResultType[]
+    baskets: ResultType[]
     result: ResultType | null
     setResultHandler: (data: FormValues) => void
     setBasketHandler: () => void
     viewBasket: boolean
     clearBasket: () => void
-    toggleViewBasket:() => void
+    toggleViewBasket: () => void
 }
 
 export type ResultDataType = {

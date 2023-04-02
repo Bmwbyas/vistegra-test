@@ -25,7 +25,7 @@ export function createData(
 
 
 const OutputData = () => {
-    const {result, setBasketHandler, basket, clearBasket,toggleViewBasket} = useContext(DataContext) as DataContextType
+    const {result, setBasketHandler, baskets, clearBasket,toggleViewBasket} = useContext(DataContext) as DataContextType
 
     if (!result) {
         return <Grid item xs={6} p={3}> </Grid>
@@ -81,7 +81,7 @@ const OutputData = () => {
                 <Button variant="contained" onClick={toggleViewBasket} sx={{my: 3}}>Показать содержимое корзины</Button>
             </Stack>
 
-            <Typography variant={"body1"}>Корзина: {basket.length}</Typography>
+            <Typography variant={"body1"}>Корзина: {baskets.length}</Typography>
         </Grid>
     );
 };

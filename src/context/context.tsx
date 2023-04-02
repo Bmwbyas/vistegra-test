@@ -12,25 +12,25 @@ type DataProviderType = {
 export const DataProvider: React.FC<DataProviderType> = ({children}) => {
 
     const [result, setResult] = useState<ResultType | null>(null)
-    const [basket, setBasket] = useState<ResultType[]>([])
+    const [baskets, setBasket] = useState<ResultType[]>([])
     const [viewBasket, setViewBasket] = useState(false)
 
     const setBasketHandler = () => {
         if (!result) {
             return
         }
-        setBasket([...basket, result])
+        setBasket([...baskets, result])
     }
     const clearBasket = () => setBasket([])
 
     const setResultHandler = (data: FormValues) => setResult(calcFrame(data))
 
-    const toggleViewBasket=()=>{
+    const toggleViewBasket = () => {
         setViewBasket(!viewBasket)
     }
 
     return <DataContext.Provider value={{
-        result, setResultHandler, basket,
+        result, setResultHandler, baskets,
         setBasketHandler, viewBasket, clearBasket,
         toggleViewBasket
     }}>
